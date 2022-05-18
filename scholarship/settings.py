@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'student.apps.StudentConfig',
+    'validation.apps.ValidationConfig',
+    'sponsor.apps.SponsorConfig',
 ]
 
 MIDDLEWARE = [
