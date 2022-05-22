@@ -49,7 +49,7 @@ class UserAdminCreationForm(forms.ModelForm):
     password_2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
-        model = MyUser
+        model = User
         fields = ['email']
 
 
