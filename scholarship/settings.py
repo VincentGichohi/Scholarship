@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'student.apps.StudentConfig',
     'validation.apps.ValidationConfig',
     'sponsor.apps.SponsorConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
