@@ -25,3 +25,9 @@ class RegisterSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError('User with given email already exists')
             return data
 
+        def create(self, validated_data):
+            user = CustomUser.objects.create_user(
+                email=validated_data['email'],
+                password=validated_data['password']
+            )
+            return user
