@@ -50,3 +50,7 @@ class LoginSerializer(serializers.Serializer):
             return user
         raise serializers.ValidationError("Incorrect credentials for user type")
 
+    def save(self, **kwargs):
+        user = self.validated_data
+        AuthToken.objects.create(user=user)
+        return user
