@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import CustomUser, Profile
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from knox.serializers import UserSerializer as KnoxUserSerializer
+from knox.models import AuthToken
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -30,4 +32,9 @@ class RegisterSerializer(serializers.ModelSerializer):
                 email=validated_data['email'],
                 password=validated_data['password']
             )
+            return user
+
+        def save(self, **kwargs):
+            user = super().save(*kwargs)
+            AuthToken.objects.create(user=user)
             return user
