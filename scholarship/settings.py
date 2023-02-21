@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'validation.apps.ValidationConfig',
     'sponsor.apps.SponsorConfig',
     'crispy_forms',
+
+    # third party libraries
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
