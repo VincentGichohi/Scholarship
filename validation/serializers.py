@@ -38,3 +38,15 @@ class RegisterSerializer(serializers.ModelSerializer):
             user = super().save(*kwargs)
             AuthToken.objects.create(user=user)
             return user
+
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        user = CustomUser.objects.filter(email=data['email'], user_type=data['user_type']).first()
+        if user and user.check_password(data['password']) and user.is_active:
+            return user
+        raise serializers.ValidationError("Incorrect credentials for user type")
+
