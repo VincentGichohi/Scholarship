@@ -6,6 +6,13 @@ from knox.serializers import UserSerializer as KnoxUserSerializer
 from knox.models import AuthToken
 
 
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'email', 'password', 'is_staff', 'is_superuser')
+        extra_kwargs = {'password': {'write_only': True}}
+
+
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
