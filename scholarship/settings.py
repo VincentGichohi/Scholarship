@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     # third party libraries
     'rest_framework',
 
-
+    # installed apps
+    'validation.apps.ValidationConfig',
+    'sponsor.apps.SponsorConfig',
+    'student.apps.StudentConfig',
 ]
 
 MIDDLEWARE = [
