@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
     # third party libraries
     'rest_framework',
+
+
 ]
 
 MIDDLEWARE = [
@@ -135,3 +137,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "validation.CustomUser"
+
+AUTHENTICATION_BACKENDS = [
+    'validation.emailbackend.EmailBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
+]
