@@ -75,3 +75,8 @@ class LoginSerializer(serializers.Serializer):
         user = self.validated_data
         AuthToken.objects.create(user=user)
         return user
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
