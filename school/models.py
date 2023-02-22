@@ -19,3 +19,14 @@ class School(models.Model):
 
     def __str__(self):
         return self.user.email
+
+
+class Reasons(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    reasons_to_be_sponsored = models.TextField()
+    recommendation_letter = models.FileField(upload_to='files')
+
+    def __str__(self):
+        return self.user.email
+
+
