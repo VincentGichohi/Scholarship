@@ -41,7 +41,7 @@ class SignUpAPI(generics.GenericAPIView):
         })
 
 
-class SignInAPIView(generics.GenericAPIView):
+class SignInAPI(generics.GenericAPIView):
     authentication_classes = [TokenAuthentication]
     serializer_class = LoginSerializer
     permission_classes = [permissions.AllowAny]
