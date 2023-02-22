@@ -13,6 +13,20 @@ class AdminSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
 
+class StaffSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'email', 'password', 'is_staff')
+        extra_kwargs =  {'password': {'write_only': True}}
+
+
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'email', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
