@@ -24,3 +24,19 @@ from social_django.utils import psa
 
 User = get_user_model()
 
+
+class SignUpAPI(generics.GenericAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.AllowAny]
+    serializer_class = RegisterSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        token = AuthToken.objects.create(user)[1]
+        return Response({
+            'user': RegisterSerializer(user, context=self.get_serializer_context()).data,
+            "token": token
+        })
+
