@@ -10,5 +10,4 @@ urlpatterns = [
     path('api/auth/user/', MainUser.as_view(), name='user'),
     path('api/auth/logout/', knox_views.LogoutView.as_view(), name='knox-logout'),
     # path('gmail/login/', GmailLoginView.as_view(), name='gmail_login'),
-
 ]
