@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # third party libraries
     'rest_framework',
+    'knox',
 ]
 
 MIDDLEWARE = [
@@ -119,6 +120,13 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication',
+    ],
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATICFILES_DIR = [
@@ -140,3 +148,6 @@ AUTHENTICATION_BACKENDS = [
     'validation.emailbackend.EmailBackend',
     # 'django.contrib.auth.backends.ModelBackend',
 ]
+
+SITE_ID = 1
+
