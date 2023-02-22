@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     # third party libraries
     'rest_framework',
     'knox',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
