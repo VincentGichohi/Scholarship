@@ -132,6 +132,14 @@ REST_FRAMEWORK = {
 
 SITE_ID = 1
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True   # or False, depending on your SMTP server configuration
+EMAIL_HOST_USER = 'your_smtp_username'
+EMAIL_HOST_PASSWORD = 'your_smtp_password'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATICFILES_DIR = [
