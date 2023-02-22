@@ -85,12 +85,12 @@ WSGI_APPLICATION = 'scholarship.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sponsorship',
         'PORT': '5432',
         'HOST': '',
         'USERNAME': 'postgres',
-        'PASSWORD': '0000',
+        'PASSWORD': '0000'
     }
 }
 
@@ -130,6 +130,8 @@ REST_FRAMEWORK = {
     ],
 }
 
+SITE_ID = 1
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATICFILES_DIR = [
@@ -152,5 +154,4 @@ AUTHENTICATION_BACKENDS = [
     # 'django.contrib.auth.backends.ModelBackend',
 ]
 
-SITE_ID = 1
 
