@@ -1,6 +1,4 @@
 from operator import imod
 from django.urls import path
-from .views import SignUpView
-urlpatterns = [
-    path('register/', SignUpView.as_view(), name='register'),
-]
+from knox import views as knox_views
+from .views import SignInAPIView, SignUpAPI, MainUser
