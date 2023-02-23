@@ -7,6 +7,11 @@ class SchoolAddSerializer(serializers.ModelSerializer):
         model = School
         fields = "__all__"
 
+    def validate(self, data):
+        """
+        Validate input data before saving to db
+        """
+
 
 class CourseAddSerializer(serializers.ModelSerializer):
     class Meta:
