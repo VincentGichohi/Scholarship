@@ -1,6 +1,6 @@
 from django.db import models
 from validation.models import CustomUser
-
+from sponsor.models import Sponsor
 
 SPONSORSHIP_STATUS = [
     ('Pending', 'PENDING'),
@@ -15,6 +15,7 @@ class Student(models.Model):
     address = models.CharField(max_length=100)
     status = models.CharField(max_length=10, choices=SPONSORSHIP_STATUS)
     phone = models.IntegerField(blank=False, null=False)
+    sponsorship_type = models.ForeignKey(Sponsor, on_delete=models.DO_NOTHING)
     email = models.EmailField(max_length=255, null=False, blank=False)
     birth_cert_file = models.FileField(upload_to='files')
     national_id = models.FileField(upload_to='files')
