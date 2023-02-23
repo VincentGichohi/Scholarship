@@ -27,6 +27,13 @@ class StudentSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
 
+class SponsorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'email', 'password']
+        extra_kwargs = ({'password': {'write_only': True}})
+
+
 # class SponsorSerializer()
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
