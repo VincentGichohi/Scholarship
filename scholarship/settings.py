@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'student.apps.StudentConfig',
     'validation.apps.ValidationConfig',
     'sponsor.apps.SponsorConfig',
+    'school.apps.SchoolConfig',
     'crispy_forms',
 
     # third party libraries
