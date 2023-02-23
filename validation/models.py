@@ -48,7 +48,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    USER_TYPE = ((1, "Admin"), (2, "Staff"), (3, "Client"))
+    USER_TYPE = ((1, "Admin"), (2, "Staff"), (3, "Client"), (4, "Sponsor"))
     GENDER = [("M", "Male"), ("F", "Female")]
 
     email = models.EmailField(unique=True)
@@ -59,6 +59,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     password2 = models.CharField(default='', max_length=100)
     profile_pic = models.ImageField()
     is_staff = models.BooleanField(default=False)
+    is_sponsor = models.BooleanField(default=False)
     address = models.TextField()
     fcm_token = models.TextField(default="")  # For firebase notifications
     created_at = models.DateTimeField(auto_now_add=True)
