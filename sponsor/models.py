@@ -2,7 +2,7 @@ from django.db import models
 from validation.models import CustomUser
 
 
-class Staff(models.Model):
+class Sponsor(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     address = models.CharField(max_length=200)
 
