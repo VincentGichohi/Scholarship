@@ -50,9 +50,14 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     USER_TYPE = ((1, "Admin"), (2, "Staff"), (3, "Client"), (4, "Sponsor"))
     GENDER = [("M", "Male"), ("F", "Female")]
+    ACTIVE_STATUS = (
+        ('active', "Active"),
+        ('inactive', 'Inactive')
+    )
 
     email = models.EmailField(unique=True)
     user_type = models.CharField(default=1, choices=USER_TYPE, max_length=1)
+    active = models.CharField(max_length=20, choices=ACTIVE_STATUS, default='inactive')
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER)

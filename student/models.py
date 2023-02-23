@@ -23,3 +23,12 @@ class Student(models.Model):
         return self.email
 
 
+class StudentProfile(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    name = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
+    address = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
+    phone = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
+    email = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.user.email
