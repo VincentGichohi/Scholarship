@@ -4,7 +4,7 @@ from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
-from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
+from .serializers import StudentRegisterSerializer, LoginSerializer, UserSerializer
 from .models import CustomUser
 from rest_framework import generics
 from knox.models import AuthToken
@@ -28,7 +28,7 @@ User = get_user_model()
 class SignUpAPI(generics.GenericAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.AllowAny]
-    serializer_class = RegisterSerializer
+    serializer_class = StudentRegisterSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -36,7 +36,7 @@ class SignUpAPI(generics.GenericAPIView):
         user = serializer.save()
         token = AuthToken.objects.create(user)[1]
         return Response({
-            'user': RegisterSerializer(user, context=self.get_serializer_context()).data,
+            'user': StudentRegisterSerializer(user, context=self.get_serializer_context()).data,
             "token": token
         })
 
