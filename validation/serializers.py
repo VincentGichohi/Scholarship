@@ -35,10 +35,10 @@ class SponsorSerializer(serializers.ModelSerializer):
 
 
 # class SponsorSerializer()
-class RegisterSerializer(serializers.ModelSerializer):
+class StudentRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'email', 'password', 'password2']
+        fields = ['id', 'email', 'password', 'password2', 'address', 'phone']
         extra_kwargs = {'password': {'write_only': True},
                         'password2': {'write_only': True}}
 
