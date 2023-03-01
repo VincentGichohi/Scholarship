@@ -7,34 +7,30 @@ from django.contrib.auth.models import (
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password=None):
+    def _create_user(self, email, password=None, **extra_fields):
         """
         Creates and saves a User with the given email and password.
         """
         if not email:
             raise ValueError('Users must have an email address')
 
-        user = self.model(
-            email=self.normalize_email(email),
-        )
-
+        user = email=self.normalize_email(email),
+        
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_staffuser(self, email, password):
+    def create_user(self, email, password, **extra_fields):
         """
-        Creates and saves a staff user with the given email and password.
+        Creates and saves a regular user with a given email and password
         """
-        user = self.create_user(
-            email,
-            password=password,
-        )
-        user.staff = True
-        user.save(using=self._db)
-        return user
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+        
 
-    def create_superuser(self, email, password):
+    def create_superuser(self, email, password, **extra_fields):
         """
         Creates and saves a superuser with the given email and password.
         """
@@ -49,27 +45,21 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    USER_TYPE = ((1, "Admin"), (2, "Staff"), (3, "Client"), (4, "Sponsor"))
-    GENDER = [("M", "Male"), ("F", "Female")]
+    USER_TYPE = ((1, "Admin"), (2, "Staff"), (3, "Student"), (4, "Sponsor"))
+    GENDER = (("M", "Male"), ("F", "Female"))
     ACTIVE_STATUS = (
         ('active', "Active"),
         ('inactive', 'Inactive')
     )
 
     email = models.EmailField(unique=True)
-    name = models.CharField(max_length=200)
-    address = models.CharField(max_length=250)
-    phone = models.IntegerField()
     user_type = models.CharField(default=1, choices=USER_TYPE, max_length=1)
     active = models.CharField(max_length=20, choices=ACTIVE_STATUS, default='inactive')
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER)
     password2 = models.CharField(default='', max_length=100)
     profile_pic = models.ImageField()
     is_staff = models.BooleanField(default=False)
     is_sponsor = models.BooleanField(default=False)
-    address = models.TextField()
     fcm_token = models.TextField(default="")  # For firebase notifications
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
