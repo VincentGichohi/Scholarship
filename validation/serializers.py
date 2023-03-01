@@ -17,7 +17,7 @@ class StaffSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ('id', 'email', 'password', 'is_staff')
-        extra_kwargs =  {'password': {'write_only': True}}
+        extra_kwargs = {'password': {'write_only': True}}
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -38,7 +38,7 @@ class SponsorSerializer(serializers.ModelSerializer):
 class StudentRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'email', 'password', 'password2', 'address', 'phone']
+        fields = ['id', 'email', 'password', 'password2', 'first_name', 'last_name', 'gender', 'address', 'phone']
         extra_kwargs = {'password': {'write_only': True},
                         'password2': {'write_only': True}}
 
@@ -47,19 +47,39 @@ class StudentRegisterSerializer(serializers.ModelSerializer):
                 validate_email(data['email'])
             except ValidationError:
                 raise serializers.ValidationError("Invalid Email Format")
+
             if len(data['password']) < 8:
                 raise serializers.ValidationError("Passwords must be at least 8 characters")
             if data['password'] != data['password2']:
                 raise serializers.ValidationError("Passwords do not match")
+            if data['phone'] is None:
+                raise serializers.ValidationError("Phone number is required.")
+            if data['address'] is None:
+                raise serializers.ValidationError("Address is required.")
+
+            if data['first_name'] is None:
+                raise serializers.ValidationError("First name field is required")
+            if data['last_name'] is None:
+                raise serializers.ValidationError('Last name field is required')
 
             if CustomUser.objects.filter(email=data['email']).exists():
                 raise serializers.ValidationError('User with given email already exists')
             return data
 
+        def validate_gender(self, value):
+            valid_genders = [choice[0] for choice in value['gender']]
+            if value not in valid_genders:
+                raise serializers.ValidationError('Invalid gender')
+            return value
+
         def create(self, validated_data):
             user = CustomUser.objects.create_user(
                 email=validated_data['email'],
-                password=validated_data['password']
+                password=validated_data['password'],
+                first_name=validated_data['first_name'],
+                last_name=validated_data['last_name'],
+                address=validated_data['address'],
+                phone=validated_data['phone']
             )
             return user
 
