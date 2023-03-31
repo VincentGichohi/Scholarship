@@ -59,6 +59,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=1, choices=GENDER)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200, default='')
     password2 = models.CharField(default='', max_length=100)
     profile_pic = models.ImageField()
     is_staff = models.BooleanField(default=False)
