@@ -37,7 +37,7 @@ class SponsorSerializer(serializers.ModelSerializer):
 class StudentRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'email', 'password', 'password2', 'first_name', 'last_name', 'gender', 'address', 'phone']
+        fields = ['id', 'email', 'password', 'password2', 'first_name', 'last_name', 'gender', 'address']
         extra_kwargs = {'password': {'write_only': True},
                         'password2': {'write_only': True}}
 
@@ -51,8 +51,8 @@ class StudentRegisterSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("Passwords must be at least 8 characters")
             if data['password'] != data['password2']:
                 raise serializers.ValidationError("Passwords do not match")
-            if data['phone'] is None:
-                raise serializers.ValidationError("Phone number is required.")
+            # if data['phone'] is None:
+            #     raise serializers.ValidationError("Phone number is required.")
             if data['address'] is None:
                 raise serializers.ValidationError("Address is required.")
 
@@ -77,8 +77,7 @@ class StudentRegisterSerializer(serializers.ModelSerializer):
                 password=validated_data['password'],
                 first_name=validated_data['first_name'],
                 last_name=validated_data['last_name'],
-                address=validated_data['address'],
-                phone=validated_data['phone']
+                address=validated_data['address']
             )
             return user
 
