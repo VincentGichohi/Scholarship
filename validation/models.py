@@ -57,6 +57,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     user_type = models.CharField(default=1, choices=USER_TYPE, max_length=1)
     active = models.CharField(max_length=20, choices=ACTIVE_STATUS, default='inactive')
     gender = models.CharField(max_length=1, choices=GENDER)
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
     password2 = models.CharField(default='', max_length=100)
     profile_pic = models.ImageField()
     is_staff = models.BooleanField(default=False)
